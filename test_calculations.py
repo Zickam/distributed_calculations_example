@@ -1,5 +1,6 @@
 import time
 
+import config
 from client import Client
 from cpu_bound_functions import getPrime
 
@@ -38,7 +39,7 @@ def testDistributedCalc():
 
     client = Client()
 
-    primes_for_distributed = primes_to_calculate[:len(primes_to_calculate) // 2]
+    primes_for_distributed = primes_to_calculate[:len(primes_to_calculate) // 2]  + [config.END_SYMBOL]
     primes_for_local = primes_to_calculate[len(primes_to_calculate) // 2:]
 
     start_time = time.time()
@@ -61,7 +62,7 @@ def testDistributedCalc():
 def main():
     time_spent_synchronous = testSynchronousCalc()
     time_spent_distributed = testDistributedCalc()
-    print("Distributed time is", round(time_spent_distributed / time_spent_synchronous, 2) * 100, "% of synchronous")
+    print("Distributed calculation is", round(time_spent_synchronous / time_spent_distributed, 2) * 100, "% faster than synchronous")
 
 
 if __name__ == "__main__":
