@@ -1,12 +1,13 @@
 import socket
 
 import config
+from config import UNIT_PORT
 from cpu_bound_functions import getPrime
 
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind(config.UNIT_ADDRESS)
+    sock.bind(("0.0.0.0", UNIT_PORT))
 
     while 1:
         sock.listen()

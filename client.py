@@ -8,7 +8,7 @@ import config
 class Client(socket.socket):
     def __init__(self):
         super().__init__()
-        self.connect(config.UNIT_ADDRESS)
+        self.connect((config.UNIT_IP, config.UNIT_PORT))
 
     def sendPrimeToCalculate(self, n: int, primes: list[int]):
         self.send(str(n).encode(encoding="utf-8"))

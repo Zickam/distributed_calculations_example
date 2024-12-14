@@ -4,8 +4,16 @@ from client import Client
 from cpu_bound_functions import getPrime
 
 primes_to_calculate = [
-    2 * 10 ** 5,
-    3 * 10 ** 5
+    2 * 10 ** 4,
+    3 * 10 ** 4,
+2 * 10 ** 4,
+    3 * 10 ** 4,
+2 * 10 ** 4,
+    3 * 10 ** 4,
+2 * 10 ** 4,
+    3 * 10 ** 4,
+2 * 10 ** 4,
+    3 * 10 ** 4
 ]
 
 def testSynchronousCalc():
@@ -51,8 +59,9 @@ def testDistributedCalc():
 
 
 def main():
-    time_spent = testSynchronousCalc()
-    time_spent = testDistributedCalc()
+    time_spent_synchronous = testSynchronousCalc()
+    time_spent_distributed = testDistributedCalc()
+    print("Distributed time is", round(time_spent_distributed / time_spent_synchronous, 2) * 100, "% of synchronous")
 
 
 if __name__ == "__main__":
