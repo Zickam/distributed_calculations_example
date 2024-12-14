@@ -12,7 +12,7 @@ class Client(socket.socket):
 
     def sendPrimeToCalculate(self, n: int, primes: list[int]):
         self.send(str(n).encode(encoding="utf-8"))
-        threading.Thread(target=self.receive, args=(primes, ))
+        threading.Thread(target=self.receive, args=(primes, )).start()
 
     def receive(self, primes: list[int]):
         while 1:

@@ -51,7 +51,7 @@ def testDistributedCalc():
 
 
 def main():
-    # time_spent = testSynchronousCalc()
+    time_spent = testSynchronousCalc()
     time_spent = testDistributedCalc()
 
 
