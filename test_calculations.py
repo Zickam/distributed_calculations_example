@@ -5,17 +5,17 @@ from client import Client
 from cpu_bound_functions import getPrime
 
 primes_to_calculate = [
-    2 * 10 ** 4,
-    3 * 10 ** 4,
-2 * 10 ** 4,
-    3 * 10 ** 4,
-2 * 10 ** 4,
-    3 * 10 ** 4,
-2 * 10 ** 4,
-    3 * 10 ** 4,
-2 * 10 ** 4,
-    3 * 10 ** 4
-] * 3
+                          2 * 10 ** 4,
+                          3 * 10 ** 4,
+                          2 * 10 ** 4,
+                          3 * 10 ** 4,
+                          2 * 10 ** 4,
+                          3 * 10 ** 4,
+                          2 * 10 ** 4,
+                          3 * 10 ** 4,
+                          2 * 10 ** 4,
+                          3 * 10 ** 4
+                      ] * 3
 
 def testSynchronousCalc():
     primes = []
