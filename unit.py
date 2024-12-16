@@ -1,5 +1,3 @@
-import logging
-
 import config
 from cpu_bound_functions import getPrime
 
