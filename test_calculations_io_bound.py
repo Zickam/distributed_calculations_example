@@ -6,11 +6,11 @@ from client import Client
 from cpu_bound_functions import getPrime, factorial
 
 factorials_to_calc = [
-                          10 ** 5,
+    10 ** 5,
     2 * 10 ** 5,
     3 * 10 ** 5,
     # 4 * 10 ** 5
-                      ]
+]
 
 def testSynchronousCalc():
     factorials = []
