@@ -15,7 +15,7 @@ primes_to_calculate = [
                           3 * 10 ** 4,
                           2 * 10 ** 4,
                           3 * 10 ** 4
-                      ] * 3
+                      ] * 6
 
 def testSynchronousCalc():
     primes = []
@@ -29,7 +29,7 @@ def testSynchronousCalc():
     time_spent = end_time - start_time
 
     print("Synchronous time:", time_spent, "seconds")
-    print("Synchronous output:", primes, "amount:", len(primes))
+    print("Synchronous output amount:", len(primes))
 
 
 async def testDistributedCalc():
@@ -58,7 +58,7 @@ async def testDistributedCalc():
     time_spent = end_time - start_time
 
     print("Distributed time:", time_spent, "seconds")
-    print("Distributed output:", primes, "amount:", len(primes))
+    print("Distributed output amount:", len(primes))
 
 
 def main():
