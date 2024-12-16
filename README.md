@@ -18,4 +18,9 @@ Compare the efficiency and speed for those two types of calculations:
 2. `python3 test_calculations.py`
 
 **Unit (remote machine)**:
-1. `docker compose up -d`
+1. Buy a VPS or VDS remote server
+2. Clone this project on that server
+3. Install docker engine
+4. cd to the project directory
+5. `docker compose up -d`
+6. Done, now just paste the server' IP into config.py on the local machine
