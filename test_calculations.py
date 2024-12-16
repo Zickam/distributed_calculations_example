@@ -1,7 +1,6 @@
 import asyncio
 import time
 
-import config
 from client import Client
 from cpu_bound_functions import getPrime
 
@@ -16,7 +15,7 @@ primes_to_calculate = [
     3 * 10 ** 4,
 2 * 10 ** 4,
     3 * 10 ** 4
-]
+] * 3
 
 def testSynchronousCalc():
     primes = []
@@ -29,10 +28,8 @@ def testSynchronousCalc():
     end_time = time.time()
     time_spent = end_time - start_time
 
-    print("Synchronous time:", time_spent)
+    print("Synchronous time:", time_spent, "seconds")
     print("Synchronous output:", primes)
-
-    return time_spent
 
 
 async def testDistributedCalc():
@@ -52,24 +49,21 @@ async def testDistributedCalc():
     for prime_for_local in primes_for_local:
         primes.append(getPrime(prime_for_local))
 
-    # other unit was calculating the stuff behind the scenes while out machine was calculating its part so now just
-    # have to wait till the other unit finishes its work
+    # other unit was calculating the stuff behind the scenes while our machine was calculating its part so now we just
+    # have to wait the other unit to finish its work
     for thread in threads:
         thread.join()
 
     end_time = time.time()
     time_spent = end_time - start_time
 
-    print("Distributed time:", time_spent)
+    print("Distributed time:", time_spent, "seconds")
     print("Distributed output:", primes)
-
-    return time_spent
 
 
 def main():
-    time_spent_synchronous = testSynchronousCalc()
-    time_spent_distributed = asyncio.run(testDistributedCalc())
-    print("Distributed calculation is", round(time_spent_synchronous / time_spent_distributed - 1, 2) * 100, "% faster than synchronous")
+    testSynchronousCalc()
+    asyncio.run(testDistributedCalc())
 
 
 if __name__ == "__main__":
