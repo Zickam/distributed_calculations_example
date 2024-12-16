@@ -8,7 +8,7 @@ from cpu_bound_functions import getPrime, factorial
 factorials_to_calc = [
                           10 ** 5,
     2 * 10 ** 5,
-    # 3 * 10 ** 5,
+    3 * 10 ** 5,
     # 4 * 10 ** 5
                       ]
 
@@ -70,6 +70,7 @@ def main():
     os.mkdir("tmp_distributed")
     os.system("rm -rf tmp_sync")
     os.mkdir("tmp_sync")
+    print("Запуск теста... (тест может занять до минуты)")
     testSynchronousCalc()
     asyncio.run(testDistributedCalc())
 

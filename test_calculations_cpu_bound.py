@@ -62,6 +62,7 @@ async def testDistributedCalc():
 
 
 def main():
+    print("Запуск теста... (тест может занять до минуты)")
     testSynchronousCalc()
     asyncio.run(testDistributedCalc())
 
