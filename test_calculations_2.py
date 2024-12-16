@@ -1,55 +1,57 @@
+import os
 import asyncio
 import time
 
 from client import Client
-from cpu_bound_functions import getPrime, getPrimes
+from cpu_bound_functions import getPrime, factorial
 
-primes_to_calculate = [
-                          2 * 10 ** 4,
-                          3 * 10 ** 4,
-                          2 * 10 ** 4,
-                          3 * 10 ** 4,
-                          2 * 10 ** 4,
-                          3 * 10 ** 4,
-                          2 * 10 ** 4,
-                          3 * 10 ** 4,
-                          2 * 10 ** 4,
-                          3 * 10 ** 4
-                      ] * 10
+factorials_to_calc = [
+                          10 ** 5,
+    2 * 10 ** 5,
+    # 3 * 10 ** 5,
+    # 4 * 10 ** 5
+                      ]
 
 def testSynchronousCalc():
-    primes = []
+    factorials = []
 
     start_time = time.time()
 
-    for prime_to_calculate in primes_to_calculate:
-        for prime in getPrimes(prime_to_calculate):
-            primes.append(prime)
+    with open("tmp_sync/fact_1.txt", "w") as file:
+        for fact in factorials_to_calc:
+            num = factorial(fact)
+            factorials.append(num)
+            file.write(str(num))
+            file.write("\n")
 
     end_time = time.time()
     time_spent = end_time - start_time
 
     print("Synchronous time:", time_spent, "seconds")
-    print("Synchronous output amount:", len(primes))
+    print("Synchronous output amount:", len(factorials))
 
 
 async def testDistributedCalc():
-    primes = []
+    factorials = []
 
     client = Client()
 
-    primes_for_distributed = primes_to_calculate[:len(primes_to_calculate) // 2]
-    primes_for_local = primes_to_calculate[len(primes_to_calculate) // 2:]
+    factorials_for_distributed = factorials_to_calc[:len(factorials_to_calc) // 2]
+    factorials_for_local = factorials_to_calc[len(factorials_to_calc) // 2:]
 
     start_time = time.time()
 
     threads = []
-    for prime_for_distributed in primes_for_distributed:
-        threads.append(client.sendPrimesToCalculate(prime_for_distributed, primes))
+    for prime_for_distributed in factorials_for_distributed:
+        threads.append(client.sendFactorialToCalculate(prime_for_distributed, factorials))
 
-    for prime_for_local in primes_for_local:
-        for prime in getPrimes(prime_for_local):
-            primes.append(prime)
+    with open("tmp_distributed/fact_1.txt", "w") as file:
+        for fact in factorials_for_local:
+            num = factorial(fact)
+            factorials.append(num)
+            file.write(str(num))
+            file.write("\n")
+
 
     # other unit was calculating the stuff behind the scenes while our machine was calculating its part so now we just
     # have to wait the other unit to finish its work
@@ -60,10 +62,14 @@ async def testDistributedCalc():
     time_spent = end_time - start_time
 
     print("Distributed time:", time_spent, "seconds")
-    print("Distributed output amount:", len(primes))
+    print("Distributed output amount:", len(factorials))
 
 
 def main():
+    os.system("rm -rf tmp_distributed")
+    os.mkdir("tmp_distributed")
+    os.system("rm -rf tmp_sync")
+    os.mkdir("tmp_sync")
     testSynchronousCalc()
     asyncio.run(testDistributedCalc())
 

@@ -1,3 +1,6 @@
+import sys
+sys.set_int_max_str_digits(10**9)
+
 def isPrime(num: int) -> bool:
     if num == 1:
         return False
@@ -21,14 +24,12 @@ def getPrime(n: int) -> list[int]:
         i += 1
     return last_prime
 
-def getPrimes(n: int) -> list[int]:
-    primes = []
-    i = 2
-    while len(primes) < n:
-        if isPrime(i):
-            primes.append(i)
-        i += 1
-    return primes
+
+def factorial(n: int) -> int:
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
 
 
 if __name__ == "__main__":
