@@ -21,6 +21,15 @@ def getPrime(n: int) -> list[int]:
         i += 1
     return last_prime
 
+def getPrimes(n: int) -> list[int]:
+    primes = []
+    i = 2
+    while len(primes) < n:
+        if isPrime(i):
+            primes.append(i)
+        i += 1
+    return primes
+
 
 if __name__ == "__main__":
     # for i in range(200):
